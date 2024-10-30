@@ -1,0 +1,15 @@
+services:
+  parkingapi:
+    image: ${DOCKER_REGISTRY-}parkingapi
+    build:
+      context: .
+      dockerfile: ParkingApi/Dockerfile
+
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server
+    container_name: mssql-server
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=superSecurePassword!
+    ports:
+      - 1433:1433
