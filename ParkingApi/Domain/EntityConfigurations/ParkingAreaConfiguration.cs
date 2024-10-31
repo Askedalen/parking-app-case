@@ -26,6 +26,16 @@ namespace Askedalen.ParkingApi.Domain.EntityConfigurations
                 parkingSpots.Property(p => p.DisabledSpots).HasColumnName("DisabledSpots").IsRequired();
                 parkingSpots.Property(p => p.DisabledSpotsEvaluation).HasColumnName("DisabledSpotsEvaluation");
             });
+            parkingArea.OwnsOne(p => p.Facilities, facilities =>
+            {
+                facilities.Property(f => f.HasToilet).HasColumnName("HasToilet");
+                facilities.Property(f => f.HasHandicapToilet).HasColumnName("HasHandicapToilet");
+                facilities.Property(f => f.HasBabyChangingTable).HasColumnName("HasBabyChangingTable");
+                facilities.Property(f => f.HasShower).HasColumnName("HasShower");
+                facilities.Property(f => f.HasAccommodation).HasColumnName("HasAccommodation");
+                facilities.Property(f => f.HasBicycleParking).HasColumnName("HasBicycleParking");
+                facilities.Property(f => f.HasMotorcycleParking).HasColumnName("HasMotorcycleParking");
+            });
             parkingArea.Property(p => p.ActivationDate).IsRequired();
             parkingArea.Property(p => p.LastUpdated).IsRequired();
             parkingArea.Property(p => p.Type).IsRequired();

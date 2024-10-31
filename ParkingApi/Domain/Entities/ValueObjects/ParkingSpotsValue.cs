@@ -27,7 +27,8 @@ public class ParkingSpotsValue
             disabledSpotsEvaluation
         );
 
-    private ParkingSpotsValue(int paidSpots, int freeSpots, int chargingSpots, string? chargingSpotsNote, int disabledSpots, string? disabledSpotsEvaluation)
+    private ParkingSpotsValue(int paidSpots, int freeSpots, int chargingSpots,
+        string? chargingSpotsNote, int disabledSpots, string? disabledSpotsEvaluation)
     {
         PaidSpots = paidSpots;
         FreeSpots = freeSpots;
