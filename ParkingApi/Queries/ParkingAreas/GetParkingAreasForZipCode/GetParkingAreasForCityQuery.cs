@@ -1,6 +1,5 @@
 ﻿using Askedalen.ParkingApi.Domain;
 using Askedalen.ParkingApi.Domain.Entities.Enums;
-using Askedalen.ParkingApi.Domain.Entities.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
