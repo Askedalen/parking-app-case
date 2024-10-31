@@ -9,6 +9,8 @@ public class ParkingSpotsValue
     public int DisabledSpots { get; init; }
     public string? DisabledSpotsEvaluation { get; init; }
 
+    public int TotalSpots => PaidSpots + FreeSpots + ChargingSpots + DisabledSpots;
+
     public static ParkingSpotsValue Create(
         int? paidSpots,
         int? freeSpots,

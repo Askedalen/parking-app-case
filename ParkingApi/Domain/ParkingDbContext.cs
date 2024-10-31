@@ -1,12 +1,13 @@
 ﻿using Askedalen.ParkingApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Askedalen.ParkingApi.Database;
+namespace Askedalen.ParkingApi.Domain;
 
 public class ParkingDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<ParkingArea> ParkingAreas { get; set; }
     public DbSet<City> Cities { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,8 +21,8 @@ public class ParkingDbContext(DbContextOptions options) : DbContext(options)
             parkingArea.Property(p => p.ExternalId).IsRequired();
             parkingArea.HasIndex(p => p.ExternalId).IsUnique();
             parkingArea.Property(p => p.Name).IsRequired();
-            parkingArea.Property(p => p.Reference).IsRequired();
-            parkingArea.Property(p => p.Address).IsRequired();
+            parkingArea.Property(p => p.Reference);
+            parkingArea.Property(p => p.Address);
             parkingArea.HasOne(p => p.City).WithMany(c => c.ParkingAreas);
             parkingArea.OwnsOne(p => p.ParkingSpots, parkingSpots =>
             {

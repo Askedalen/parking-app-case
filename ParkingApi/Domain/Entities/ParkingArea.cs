@@ -6,21 +6,21 @@ namespace Askedalen.ParkingApi.Domain.Entities;
 
 public class ParkingArea
 {
-    public Guid Id { get; init; }
-    public int ExternalId { get; init; }
-    public string Name { get; init; }
-    public string Reference { get; init; }
-    public string Address { get; init; }
-    public City City { get; init; }
-    public ParkingSpotsValue ParkingSpots { get; init; }
-    public DateTime ActivationDate { get; init; }
-    public DateTime LastUpdated { get; init; }
-    public ParkingAreaType Type { get; init; }
-    public bool ParkAndRide { get; init; }
-    public CoordinateValue Coordinate { get; init;}
-    public Organization ParkingProvider { get; init; }
-    public Organization? ParkingEnforcer { get; init; }
-    public bool IsActive { get; init; }
+    public Guid Id { get; }
+    public int ExternalId { get; }
+    public string Name { get; private set; }
+    public string? Reference { get; private set; }
+    public string? Address { get; private set; }
+    public City City { get; }
+    public ParkingSpotsValue ParkingSpots { get; private set; }
+    public DateTime ActivationDate { get; private set; }
+    public DateTime LastUpdated { get; private set; }
+    public ParkingAreaType Type { get; private set; }
+    public bool ParkAndRide { get; private set; }
+    public CoordinateValue Coordinate { get; private set; }
+    public Organization ParkingProvider { get; }
+    public Organization? ParkingEnforcer { get; private set; }
+    public bool IsActive { get; private set; }
 
     public ParkingArea(
         Guid id,
@@ -36,7 +36,7 @@ public class ParkingArea
         bool parkAndRide,
         CoordinateValue coordinate,
         Organization parkingProvider,
-        Organization parkingEnforcer,
+        Organization? parkingEnforcer,
         bool isActive)
     {
         Id = id;
@@ -52,6 +52,30 @@ public class ParkingArea
         ParkAndRide = parkAndRide;
         Coordinate = coordinate;
         ParkingProvider = parkingProvider;
+        ParkingEnforcer = parkingEnforcer;
+        IsActive = isActive;
+    }
+
+    public void Update(
+        string name,
+        string reference,
+        string address,
+        ParkingSpotsValue parkingSpots,
+        DateTime lastUpdated,
+        ParkingAreaType type,
+        bool parkAndRide,
+        CoordinateValue coordinate,
+        Organization? parkingEnforcer,
+        bool isActive)
+    {
+        Name = name;
+        Reference = reference;
+        Address = address;
+        ParkingSpots = parkingSpots;
+        LastUpdated = lastUpdated;
+        Type = type;
+        ParkAndRide = parkAndRide;
+        Coordinate = coordinate;
         ParkingEnforcer = parkingEnforcer;
         IsActive = isActive;
     }

@@ -32,7 +32,7 @@ public record ParkeringsomradeResponse(
     double Breddegrad,
     double Lengdegrad,
     DeaktivertResponse? Deaktivert,
-    ParkeringsomradeVersjonResponse? AktivVersjon
+    ParkeringsomradeVersjonResponse AktivVersjon
 );
 
 public record DeaktivertResponse(DateTime DeaktivertTidspunkt);
@@ -49,8 +49,8 @@ public record ParkeringsomradeVersjonResponse(
     string MerknadLadeplasser,
     int? AntallForflytningshemmede,
     string VurderingForflytningshemmede,
-    DateTime? Aktiveringstidspunkt,
-    DateTime? SistEndret,
+    DateTime Aktiveringstidspunkt,
+    DateTime SistEndret,
     int? Versjonsnummer,
     DateTime? Sluttidspunkt,
     int? OpplastetVurderingId,

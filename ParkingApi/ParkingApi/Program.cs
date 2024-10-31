@@ -1,5 +1,6 @@
-using Askedalen.ParkingApi.Database;
+using Askedalen.ParkingApi.Domain;
 using Askedalen.ParkingApi.ParkeringsRegisteret;
+using Askedalen.ParkingApi.Queries.ParkingAreas;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,12 +14,14 @@ builder.Services.AddDbContext<ParkingDbContext>(options => options.UseSqlServer(
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<ParkeringsRegisteretClient>();
 
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<GetParkingAreasForZipCodeQuery>());
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => options.DisplayOperationId());
 
     // Run database migrations on startup
     using var scope = app.Services.CreateScope();
@@ -28,16 +31,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-await app.Services.SeedParkeringsRegisteretData();
+//await app.Services.SeedParkeringsRegisteretData();
 
-app.MapGet("/parking", async (ParkingDbContext dbContext) =>
-{
-    var parkings = await dbContext.ParkingAreas.ToListAsync();
-
-    return Results.Ok();
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapParkingAreaEndpoints();
 
 app.Run();
 
