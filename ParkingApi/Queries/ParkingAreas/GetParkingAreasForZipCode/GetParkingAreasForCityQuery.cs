@@ -1,5 +1,6 @@
 ﻿using Askedalen.ParkingApi.Domain;
 using Askedalen.ParkingApi.Domain.Entities.Enums;
+using Askedalen.ParkingApi.Domain.Entities.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,30 +11,16 @@ using System.Threading.Tasks;
 
 namespace Askedalen.ParkingApi.Queries.ParkingAreas;
 
-public record GetParkingAreasForZipCodeQuery(string ZipCode, FilterModel Filter) : IRequest<IEnumerable<GetParkingAreasForZipCodeResponse>>
-{
-    public void Validate()
-    {
-        if (string.IsNullOrWhiteSpace(ZipCode))
-            throw new ArgumentException("Zip code cannot be empty.");
-        if (ZipCode.Length != 4)
-            throw new ArgumentException("Zip code must be 4 characters long.");
-        if (!ZipCode.All(char.IsDigit))
-            throw new ArgumentException("Zip code must be numeric.");
-    }
-}
-
+public record GetParkingAreasForCityQuery(string City, FilterModel Filter) : IRequest<IEnumerable<GetParkingAreasForZipCodeResponse>>;
 public class GetParkingAreasForZipCodeQueryHandler(ParkingDbContext dbContext)
-: IRequestHandler<GetParkingAreasForZipCodeQuery, IEnumerable<GetParkingAreasForZipCodeResponse>>
+: IRequestHandler<GetParkingAreasForCityQuery, IEnumerable<GetParkingAreasForZipCodeResponse>>
 {
-    public async Task<IEnumerable<GetParkingAreasForZipCodeResponse>> Handle(GetParkingAreasForZipCodeQuery query,
+    public async Task<IEnumerable<GetParkingAreasForZipCodeResponse>> Handle(GetParkingAreasForCityQuery query,
         CancellationToken cancellationToken)
     {
-        query.Validate();
-
         var responses = await dbContext.ParkingAreas
             .Include(parkingArea => parkingArea.City)
-            .Where(parkingArea => parkingArea.City.ZipCode == query.ZipCode)
+            .Where(parkingArea => parkingArea.City.Name == query.City)
             .WithFilter(query.Filter)
             .Select(parkingArea => new GetParkingAreasForZipCodeResponse(
                 parkingArea.Id,

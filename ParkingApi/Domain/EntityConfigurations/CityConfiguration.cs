@@ -11,8 +11,7 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
         city.ToTable("Cities");
         city.HasKey(c => c.Id);
         city.Property(c => c.Id).ValueGeneratedNever();
-        city.Property(c => c.ZipCode).IsRequired();
-        city.HasIndex(c => c.ZipCode).IsUnique();
         city.Property(c => c.Name).IsRequired();
+        city.HasIndex(c => c.Name).IsUnique();
     }
 }

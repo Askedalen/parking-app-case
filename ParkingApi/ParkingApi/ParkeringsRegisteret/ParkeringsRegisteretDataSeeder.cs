@@ -78,7 +78,7 @@ public static class ParkeringsRegisteretDataSeeder
         dbContext.Add(parkingArea);
     }
 
-    private static ParkingSpotsValue CreateParkingSpotsValue(dynamic activeVersion) =>
+    private static ParkingSpotsValue CreateParkingSpotsValue(ParkeringsomradeVersjonResponse activeVersion) =>
         ParkingSpotsValue.Create(activeVersion.AntallAvgiftsbelagtePlasser, activeVersion.AntallAvgiftsfriePlasser,
             activeVersion.AntallLadeplasser, activeVersion.MerknadLadeplasser, activeVersion.AntallForflytningshemmede,
             activeVersion.VurderingForflytningshemmede);
@@ -102,12 +102,12 @@ public static class ParkeringsRegisteretDataSeeder
         return organization;
     }
 
-    private static City GetOrCreateCity(dynamic activeVersion, List<City> cities, ParkingDbContext dbContext)
+    private static City GetOrCreateCity(ParkeringsomradeVersjonResponse activeVersion, List<City> cities, ParkingDbContext dbContext)
     {
-        var city = cities.FirstOrDefault(c => c.ZipCode == activeVersion.Postnummer);
+        var city = cities.FirstOrDefault(c => c.Name == activeVersion.Poststed);
         if (city == null)
         {
-            city = new City(Guid.NewGuid(), activeVersion.Postnummer, activeVersion.Poststed);
+            city = new City(Guid.NewGuid(), activeVersion.Poststed);
             cities.Add(city);
             dbContext.Add(city);
         }

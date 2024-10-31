@@ -4,6 +4,7 @@ using Askedalen.ParkingApi.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Askedalen.ParkingApi.Domain.Migrations
 {
     [DbContext(typeof(ParkingDbContext))]
-    partial class ParkingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241031134853_RemoveZipCodeFromCity")]
+    partial class RemoveZipCodeFromCity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +106,7 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
             modelBuilder.Entity("Askedalen.ParkingApi.Domain.Entities.City", b =>
                 {
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.City.Name#Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
                         {
                             b1.Property<Guid>("CityId")
                                 .HasColumnType("uniqueidentifier");
@@ -118,7 +121,7 @@ namespace Askedalen.ParkingApi.Domain.Migrations
                             b1.HasIndex("Value")
                                 .IsUnique();
 
-                            b1.ToTable("Cities", (string)null);
+                            b1.ToTable("Cities");
 
                             b1.WithOwner()
                                 .HasForeignKey("CityId");
@@ -130,7 +133,7 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
             modelBuilder.Entity("Askedalen.ParkingApi.Domain.Entities.Organization", b =>
                 {
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.Organization.Name#Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uniqueidentifier");
@@ -142,7 +145,7 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
                             b1.HasKey("OrganizationId");
 
-                            b1.ToTable("Organizations", (string)null);
+                            b1.ToTable("Organizations");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId");
@@ -170,7 +173,25 @@ namespace Askedalen.ParkingApi.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ParkingArea.Coordinate#Askedalen.ParkingApi.Domain.Entities.ValueObjects.CoordinateValue", "Coordinate", b1 =>
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("ParkingAreaId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("ParkingAreaId");
+
+                            b1.ToTable("ParkingAreas");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ParkingAreaId");
+                        });
+
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.CoordinateValue", "Coordinate", b1 =>
                         {
                             b1.Property<Guid>("ParkingAreaId")
                                 .HasColumnType("uniqueidentifier");
@@ -185,13 +206,13 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
                             b1.HasKey("ParkingAreaId");
 
-                            b1.ToTable("ParkingAreas", (string)null);
+                            b1.ToTable("ParkingAreas");
 
                             b1.WithOwner()
                                 .HasForeignKey("ParkingAreaId");
                         });
 
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ParkingArea.Facilities#Askedalen.ParkingApi.Domain.Entities.ValueObjects.FacilitiesValue", "Facilities", b1 =>
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.FacilitiesValue", "Facilities", b1 =>
                         {
                             b1.Property<Guid>("ParkingAreaId")
                                 .HasColumnType("uniqueidentifier");
@@ -226,31 +247,13 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
                             b1.HasKey("ParkingAreaId");
 
-                            b1.ToTable("ParkingAreas", (string)null);
+                            b1.ToTable("ParkingAreas");
 
                             b1.WithOwner()
                                 .HasForeignKey("ParkingAreaId");
                         });
 
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ParkingArea.Name#Askedalen.ParkingApi.Domain.Entities.ValueObjects.NameValue", "Name", b1 =>
-                        {
-                            b1.Property<Guid>("ParkingAreaId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("ParkingAreaId");
-
-                            b1.ToTable("ParkingAreas", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("ParkingAreaId");
-                        });
-
-                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ParkingArea.ParkingSpots#Askedalen.ParkingApi.Domain.Entities.ValueObjects.ParkingSpotsValue", "ParkingSpots", b1 =>
+                    b.OwnsOne("Askedalen.ParkingApi.Domain.Entities.ValueObjects.ParkingSpotsValue", "ParkingSpots", b1 =>
                         {
                             b1.Property<Guid>("ParkingAreaId")
                                 .HasColumnType("uniqueidentifier");
@@ -281,7 +284,7 @@ namespace Askedalen.ParkingApi.Domain.Migrations
 
                             b1.HasKey("ParkingAreaId");
 
-                            b1.ToTable("ParkingAreas", (string)null);
+                            b1.ToTable("ParkingAreas");
 
                             b1.WithOwner()
                                 .HasForeignKey("ParkingAreaId");

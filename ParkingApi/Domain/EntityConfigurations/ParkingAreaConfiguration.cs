@@ -16,7 +16,7 @@ namespace Askedalen.ParkingApi.Domain.EntityConfigurations
             parkingArea.Property(p => p.Name).IsRequired();
             parkingArea.Property(p => p.Reference);
             parkingArea.Property(p => p.Address);
-            parkingArea.HasOne(p => p.City).WithMany(c => c.ParkingAreas);
+            parkingArea.HasOne(p => p.City).WithMany();
             parkingArea.OwnsOne(p => p.ParkingSpots, parkingSpots =>
             {
                 parkingSpots.Property(p => p.PaidSpots).HasColumnName("PaidSpots").IsRequired();

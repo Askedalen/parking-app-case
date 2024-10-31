@@ -14,5 +14,4 @@ public class Organization
         Name = name;
         OrganizationNumber = organizationNumber;
     }
-
 }

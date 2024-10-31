@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ParkingDbContext>(options => options.UseSqlServer(
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<ParkeringsRegisteretClient>();
 
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<GetParkingAreasForZipCodeQuery>());
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<GetParkingAreasForCityQuery>());
 
 var app = builder.Build();
 

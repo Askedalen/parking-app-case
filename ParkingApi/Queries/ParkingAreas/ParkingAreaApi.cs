@@ -15,8 +15,8 @@ public static class ParkingAreaApi
             .WithOpenApi()
             .WithTags("ParkingArea");
 
-        parkingAreaGroup.MapGet("/zip-code/{zipCode}", async (
-            [FromRoute] string zipCode,
+        parkingAreaGroup.MapGet("/city/{cityName}", async (
+            [FromRoute] string cityName,
             [FromQuery] ParkingAreaType? parkingAreaType,
             [FromQuery] bool? parkAndRide,
             [FromQuery] bool? freeSpots,
@@ -25,7 +25,7 @@ public static class ParkingAreaApi
             IMediator mediator) =>
         {
             var filter = FilterModel.Create(parkingAreaType, parkAndRide, freeSpots, chargingSpots, disabledSpots);
-            var query = new GetParkingAreasForZipCodeQuery(zipCode, filter);
+            var query = new GetParkingAreasForCityQuery(cityName, filter);
             var response = await mediator.Send(query);
             return response;
         })
