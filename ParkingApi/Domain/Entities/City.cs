@@ -5,9 +5,9 @@ namespace Askedalen.ParkingApi.Domain.Entities;
 
 public class City
 {
-    public Guid Id { get; init; }
-    public string ZipCode { get; init; }
-    public string Name { get; init; }
+    public Guid Id { get; }
+    public string ZipCode { get; }
+    public string Name { get; }
 
     public IReadOnlyList<ParkingArea> ParkingAreas = new List<ParkingArea>();
 

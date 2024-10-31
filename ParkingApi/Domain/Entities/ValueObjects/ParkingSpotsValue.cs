@@ -2,12 +2,12 @@
 
 public class ParkingSpotsValue
 {
-    public int PaidSpots { get; init; }
-    public int FreeSpots { get; init; }
-    public int ChargingSpots { get; init; }
-    public string? ChargingSpotsNote { get; init; }
-    public int DisabledSpots { get; init; }
-    public string? DisabledSpotsEvaluation { get; init; }
+    public int PaidSpots { get; }
+    public int FreeSpots { get; }
+    public int ChargingSpots { get; }
+    public string? ChargingSpotsNote { get; }
+    public int DisabledSpots { get; }
+    public string? DisabledSpotsEvaluation { get; }
 
     public int TotalSpots => PaidSpots + FreeSpots + ChargingSpots + DisabledSpots;
 
@@ -18,13 +18,22 @@ public class ParkingSpotsValue
         string? chargingSpotsNote,
         int? disabledSpots,
         string? disabledSpotsEvaluation)
-        => new()
-        {
-            PaidSpots = paidSpots ?? 0,
-            FreeSpots = freeSpots ?? 0,
-            ChargingSpots = chargingSpots ?? 0,
-            ChargingSpotsNote = chargingSpotsNote,
-            DisabledSpots = disabledSpots ?? 0,
-            DisabledSpotsEvaluation = disabledSpotsEvaluation
-        };
+        => new(
+            paidSpots ?? 0,
+            freeSpots ?? 0,
+            chargingSpots ?? 0,
+            chargingSpotsNote,
+            disabledSpots ?? 0,
+            disabledSpotsEvaluation
+        );
+
+    private ParkingSpotsValue(int paidSpots, int freeSpots, int chargingSpots, string? chargingSpotsNote, int disabledSpots, string? disabledSpotsEvaluation)
+    {
+        PaidSpots = paidSpots;
+        FreeSpots = freeSpots;
+        ChargingSpots = chargingSpots;
+        ChargingSpotsNote = chargingSpotsNote;
+        DisabledSpots = disabledSpots;
+        DisabledSpotsEvaluation = disabledSpotsEvaluation;
+    }
 }

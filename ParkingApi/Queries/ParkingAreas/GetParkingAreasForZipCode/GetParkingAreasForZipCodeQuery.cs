@@ -23,8 +23,8 @@ public record GetParkingAreasForZipCodeQuery(string ZipCode, FilterModel Filter)
     }
 }
 
-    public class GetParkingAreasForZipCodeQueryHandler(ParkingDbContext dbContext)
-    : IRequestHandler<GetParkingAreasForZipCodeQuery, IEnumerable<GetParkingAreasForZipCodeResponse>>
+public class GetParkingAreasForZipCodeQueryHandler(ParkingDbContext dbContext)
+: IRequestHandler<GetParkingAreasForZipCodeQuery, IEnumerable<GetParkingAreasForZipCodeResponse>>
 {
     public async Task<IEnumerable<GetParkingAreasForZipCodeResponse>> Handle(GetParkingAreasForZipCodeQuery query,
         CancellationToken cancellationToken)
