@@ -1,0 +1,37 @@
+<div class="flex flex-col flex-grow">
+    @for (parkingArea of parkingList; track parkingArea.id) {
+        <div class="flex flex-col">
+            <div class="parking-list-item flex flex-row p-3 justify-between cursor-pointer" (click)="updateExpandedParking(parkingArea)">
+                <span>{{ parkingArea.name }}</span>
+                <span>{{ parkingArea.totalSpots }} plasser</span>
+            </div>
+            <div class="hidden-parking parking-list-details flex flex-row justify-start" [class.expanded-parking]="expandedParking === parkingArea">
+                <div class="flex flex-col pr-10">
+                    <span class="details-header">Detaljer</span>
+                    <span>Adresse: {{ parkingArea.address }}</span>
+                    <span>Poststed: {{ parkingArea.city }}</span>
+                    <span>Tilbyder: {{ parkingArea.provider }}</span>
+                    <span>Type: {{ parkingArea.parkingAreaType | parkingAreaType }}</span>
+                </div>
+                <div class="flex flex-col pr-10">
+                    <span class="details-header">Plasser</span>
+                    <span>Gratis plasser: {{ parkingArea.freeSpots }}</span>
+                    <span>Betalte plasser: {{ parkingArea.paidSpots }}</span>
+                    <span>HC-plasser: {{ parkingArea.disabledSpots }}</span>
+                    <span>Ladeplasser: {{ parkingArea.chargingSpots }}</span>
+                    <span>Innfartsparkering: {{ parkingArea.parkAndRide | jaNei }}</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="details-header">Fasiliteter</span>
+                    <span>Toaletter: {{ parkingArea.hasToilet | jaNei }}</span>
+                    <span>HC-toalett: {{ parkingArea.hasHandicapToilet | jaNei }}</span>
+                    <span>Stellebord: {{ parkingArea.hasBabyChangingTable | jaNei }}</span>
+                    <span>Dusj: {{ parkingArea.hasShower | jaNei }}</span>
+                    <span>Overnatting: {{ parkingArea.hasAccommodation | jaNei }}</span>
+                    <span>Sykkelparkering: {{ parkingArea.hasBicycleParking | jaNei }}</span>
+                    <span>Motorsykkelparkering: {{ parkingArea.hasMotorcycleParking | jaNei }}</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

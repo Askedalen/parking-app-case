@@ -1,0 +1,31 @@
+.parking-list-item {
+    background-color: #a6d2d2;
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.parking-list-item:hover {
+    background-color: #8db6b6;
+}
+
+.parking-list-details {
+    background-color: #8db6b6;
+    color: black;
+}
+
+.details-header {
+    font-weight: bold;
+}
+
+.hidden-parking {
+    height: 0;
+    padding: 0;
+    border-bottom: none;
+    overflow: hidden;
+}
+
+.expanded-parking {
+    height: auto;
+    padding: 1.5rem 0 1.5rem 0.75rem;
+    border-bottom: 1px solid black;
+}

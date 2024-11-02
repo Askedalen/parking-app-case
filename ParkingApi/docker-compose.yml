@@ -4,6 +4,11 @@ services:
     build:
       context: .
       dockerfile: ParkingApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5000:80"
 
   mssql-server:
     image: mcr.microsoft.com/mssql/server

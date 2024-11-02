@@ -13,7 +13,7 @@ public class ParkingArea
     public string? Address { get; private set; }
     public City City { get; }
     public ParkingSpotsValue ParkingSpots { get; private set; }
-    public FacilitiesValue? Facilities { get; private set; }
+    public FacilitiesValue Facilities { get; private set; }
     public DateTime ActivationDate { get; private set; }
     public DateTime LastUpdated { get; private set; }
     public ParkingAreaType Type { get; private set; }
@@ -47,6 +47,7 @@ public class ParkingArea
         Address = address;
         City = city;
         ParkingSpots = parkingSpots;
+        Facilities = FacilitiesValue.CreateEmpty();
         ActivationDate = activationDate;
         LastUpdated = lastUpdated;
         Type = type;

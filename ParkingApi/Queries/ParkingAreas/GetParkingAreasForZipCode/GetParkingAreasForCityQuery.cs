@@ -25,6 +25,23 @@ public class GetParkingAreasForZipCodeQueryHandler(ParkingDbContext dbContext)
                 parkingArea.Id,
                 parkingArea.Name,
                 parkingArea.ParkingSpots.TotalSpots,
+                parkingArea.Address,
+                parkingArea.City.Name,
+                parkingArea.ParkingSpots.PaidSpots,
+                parkingArea.ParkingSpots.FreeSpots,
+                parkingArea.ParkingSpots.ChargingSpots,
+                parkingArea.ParkingSpots.ChargingSpotsNote,
+                parkingArea.ParkingSpots.DisabledSpots,
+                parkingArea.ParkingSpots.DisabledSpotsEvaluation,
+                parkingArea.ParkAndRide,
+                parkingArea.Facilities.HasToilet,
+                parkingArea.Facilities.HasHandicapToilet,
+                parkingArea.Facilities.HasBabyChangingTable,
+                parkingArea.Facilities.HasShower,
+                parkingArea.Facilities.HasAccommodation,
+                parkingArea.Facilities.HasBicycleParking,
+                parkingArea.Facilities.HasMotorcycleParking,
+                parkingArea.ParkingProvider.Name,
                 parkingArea.Type))
             .AsNoTracking()
             .ToListAsync(cancellationToken);
@@ -33,4 +50,26 @@ public class GetParkingAreasForZipCodeQueryHandler(ParkingDbContext dbContext)
     }
 }
 
-public record GetParkingAreasForZipCodeResponse(Guid Id, string Name, int TotalSpots, ParkingAreaType ParkingAreaType);
+public record GetParkingAreasForZipCodeResponse(
+    Guid Id,
+    string Name,
+    int TotalSpots,
+    string? Address,
+    string City,
+    int? paidSpots,
+    int? freeSpots,
+    int? chargingSpots,
+    string? chargingSpotsNote,
+    int? disabledSpots,
+    string? disabledSpotsEvaluation,
+    bool ParkAndRide,
+    bool? hasToilet,
+    bool? hasHandicapToilet,
+    bool? hasBabyChangingTable,
+    bool? hasShower,
+    bool? HasAccommodation,
+    bool? HasBicycleParking,
+    bool? HasMotorcycleParking,
+    string Provider,
+    ParkingAreaType ParkingAreaType
+);

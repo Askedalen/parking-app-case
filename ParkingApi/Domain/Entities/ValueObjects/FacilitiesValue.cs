@@ -28,6 +28,8 @@ public class FacilitiesValue
             hasMotorcycleParking
         );
 
+    public static FacilitiesValue CreateEmpty() => new(null, null, null, null, null, null, null);
+
     private FacilitiesValue(bool? hasToilet, bool? hasHandicapToilet, bool? hasBabyChangingTable, bool? hasShower,
         bool? hasAccommodation, bool? hasBicycleParking, bool? hasMotorcycleParking)
     {

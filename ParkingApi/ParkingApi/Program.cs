@@ -31,7 +31,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//await app.Services.SeedParkeringsRegisteretData();
+await app.Services.SeedParkeringsRegisteretData();
 
 app.MapParkingAreaEndpoints();
 
