@@ -8,9 +8,17 @@ Systemet består av to deler:
 - En Angular web app som henter informasjon fra API'et og viser det for brukeren.
 
 ### Kjøring
-API'et kan kjøres ved å åpne ParkingApi.sln i Visual Studio, velge "Docker Compose" som oppstartsprosjekt og kjøre det. Krever at Docker Desktop kjører på maskinen. Det opprettes to Docker-containere, én med API'et på localhost:5000 og én med database på localhost:1433.
+#### Backend
+- Krever at Docker Desktop kjører på maskinen
+- Åpne ParkingApi.sln i Visual Studio
+- Velg "Docker Compose" som oppstartsprosjekt og kjør
+- Det opprettes to Docker-containere, én med API'et på localhost:5000 og én med SQL Server på localhost:1433.
 
-Web-appen kan kjøres ved å navigere til parking-app/ i terminalen og kjøre `ng serve --open`. Da kjøres applikasjonen på localhost:4200, og nettleseren åpnes med denne addressen. Krever Node v22 eller nyere og Angular CLI. 
+#### Frontend
+- Krever Node v22 eller nyere og Angular CLI
+- Naviger til til parking-app/ i terminalen
+- Kjør `ng serve --open`
+- Applikasjonen kjøres på localhost:4200, og nettleseren åpnes med denne addressen
 
 ## Svar på oppgaver
 ### Del 1
